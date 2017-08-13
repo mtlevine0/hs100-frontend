@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h3 style="text-align: center">Device List</h3>
+    <br>
+    <div class="list-group-hover">
+        <a class="list-group-item" *ngFor="let device of deviceList; let i = index" (click)="onSelectDevice(i)" [class.active]="i == selectedRow">
+          {{ device.name }}
+        </a>
+    </div>
+  </div>
+</div>
+

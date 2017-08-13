@@ -1,0 +1,8 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    {{ device.name }} - {{ device.ip }}
+  </div>
+  <button class="btn btn-success" (click)="onTurnOnDevice()">ON</button>
+  <button class="btn btn-danger" (click)="onTurnOffDevice()">OFF</button>
+  <button class="btn btn-warning" (click)="onRemoveDevice()">Remove</button>
+</div>
