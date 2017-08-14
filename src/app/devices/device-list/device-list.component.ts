@@ -10,20 +10,16 @@ import { DeviceService } from '../../device.service';
 })
 export class DeviceListComponent implements OnInit {
   selectedRow: number = 0;
-
   deviceList:Device[];
-  device: Device;
 
   constructor(public deviceService:DeviceService) { }
 
   ngOnInit() {
-    this.deviceService.deviceSelected.emit(this.deviceList[0])
-    this.deviceService.getDevices().subscribe(
-      (device: Device) => {
-        this.device = device;
-      }
-    )
-    console.log(this.device);
+    // this.deviceService.getDevices().subscribe((data) => this.deviceList = data);
+
+    this.deviceList = this.deviceService.getDevices();//.subscribe((data) => this.deviceList = data);    
+    
+    this.deviceService.deviceSelected.emit(new Device("testing name", "1234"));
   }
 
   onSelectDevice(index) {

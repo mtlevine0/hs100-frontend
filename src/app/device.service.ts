@@ -1,6 +1,7 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import 'rxjs/add/operator/map';
 
 import { Device } from './device.model';
 import { DEVICES } from './mock-devices';
@@ -9,19 +10,25 @@ import { DEVICES } from './mock-devices';
 export class DeviceService {
     public baseUrl: string = "http://localhost:8080/api/v1";
     public deviceSelected = new EventEmitter<Device>();
+    public deviceList: Device[];
 
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+        this.getDevices();
+    }
 
-    public getDevices(): Observable<Device[]> {
+    // public getDevices(): Observable<Device[]> {
+    public getDevices(): Device[] {
+            
+        // return this.http.get(this.baseUrl + "/Devices")
+        //     .map((response: Response) => response.json());
 
-        return this.http.get(this.baseUrl + "/Devices")
-            .map(
-                (response: Response) => response.json()
-            );
+        this.http.get(this.baseUrl + "/Devices")
+        .map((response: Response) => response.json())
+        .subscribe((data) => this.deviceList = data);
 
-        // console.log(data);
+        console.log(this.deviceList);
 
-        // return DEVICES.slice();
+        return this.deviceList;
     }
 
     public addDevice(device: Device) {
